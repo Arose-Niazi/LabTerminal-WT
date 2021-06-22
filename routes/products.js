@@ -5,7 +5,6 @@ var checkSessionAuth = require("../middlewares/checkSessionAuth");
 /* GET home page. */
 router.get("/", async function (req, res, next) {
   let products = await Product.find();
-  console.log(req.session.user);
   res.render("products/list", { title: "Products", products });
 });
 
@@ -24,13 +23,12 @@ router.post("/products/add", checkSessionAuth, async function (req, res, next) {
   await product.save();
   res.redirect("/");
 });
-router.get("/products/delete/:id", async function (req, res, next) {
+router.get("/products/delete/:id", checkSessionAuth, async function (req, res, next) {
   let product = await Product.findByIdAndDelete(req.params.id);
   res.redirect("/");
 });
 router.get("/products/cart/:id", async function (req, res, next) {
   let product = await Product.findById(req.params.id);
-  console.log("Add This Product in cart");
   let cart = [];
   if (req.cookies.cart) cart = req.cookies.cart;
   cart.push(product);
@@ -53,14 +51,19 @@ router.get("/products/edit/:id",checkSessionAuth, async function (req, res, next
 });
 router.post("/products/edit/:id",checkSessionAuth, async function (req, res, next) {
   let product = await Product.findById(req.params.id);
-  product.name = req.body.name;
-  product.price = req.body.price;
-  product.discription = req.body.discription;
+  if(req.body.name)
+    product.name = req.body.name;
+  if(req.body.price)
+    product.name = req.body.price;
+  if(req.body.discription)
+    product.name = req.body.discription;
+  if(req.body.rating)
+    product.name = req.body.rating;
   await product.save();
   res.redirect("/");
 });
 
-router.post("/products/rating", async function (req, res, next) {
+router.post("/products/rating", checkSessionAuth, async function (req, res, next) {
   let product = await Product.findById(req.body._id);
   product.rating = req.body.rate;
   await product.save();

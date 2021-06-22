@@ -10,7 +10,7 @@ var usersRouter = require("./routes/users");
 var session = require("express-session");
 var sessionAuth = require("./middlewares/sessionAuth");
 var app = express();
-app.use(session({ secret: "keyboard cat", cookie: { maxAge: 60000 } }));
+app.use(session({ secret: "keyboard cat", cookie: { maxAge: 60000 }, resave: true , saveUninitialized: false }));
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
