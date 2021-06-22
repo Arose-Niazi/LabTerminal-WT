@@ -4,12 +4,12 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
-var indexRouter = require("./routes/index");
 var productsRouter = require("./routes/products");
 var usersRouter = require("./routes/users");
 var session = require("express-session");
 var sessionAuth = require("./middlewares/sessionAuth");
 var app = express();
+app.use('/favicon.ico', express.static('favicon.ico'));
 app.use(session({ secret: "keyboard cat", cookie: { maxAge: 60000 }, resave: true , saveUninitialized: false }));
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -20,6 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
 
 //app.use("/", indexRouter);
 app.use("/", productsRouter);
