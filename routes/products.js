@@ -54,11 +54,11 @@ router.post("/products/edit/:id",checkSessionAuth, async function (req, res, nex
   if(req.body.name)
     product.name = req.body.name;
   if(req.body.price)
-    product.name = req.body.price;
+    product.price = req.body.price;
   if(req.body.discription)
-    product.name = req.body.discription;
+    product.discription = req.body.discription;
   if(req.body.rating)
-    product.name = req.body.rating;
+    product.rating = req.body.rating;
   await product.save();
   res.redirect("/");
 });

@@ -60,7 +60,7 @@ block content
                             form(action="/products/edit/"+product._id,method="post")
                                 div(class="form-group row")
                                     .col-sm-6
-                                        select#rate(class="form-control", name="rate" value=product.rating)
+                                        select#rating(class="form-control", name="rating" value=product.rating)
                                             if product.rating == 1
                                                 option(selected) 1
                                             else 
