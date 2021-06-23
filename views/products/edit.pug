@@ -5,10 +5,10 @@ block content
     form(action="/products/edit/"+product._id,method="post")
         .form-group
             label(for="name", class="spacer") Product Name
-            input#name(type="text", class="form-control", name="name", value=product.name)
+            input#name(type="text", class="form-control", name="name", value=product.name, required)
         .form-group
             label(for="price", class="spacer") Product Price
-            input#price(type="text", class="form-control", name="price", value=product.price)
+            input#price(type="text", class="form-control", name="price", value=product.price, reqired)
         .form-group
             label(for="discription", class="spacer") Product Description
             input#discription(type="text", class="form-control", name="discription", value=product.discription)
